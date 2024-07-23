@@ -21,7 +21,7 @@ static void	ft_printf_free(t_params *params)
 	free(params);
 }
 
-static size_t	ft_printf_write(t_params *params, va_list *args)
+static size_t	ft_printf_write(t_params *params)
 {
 	size_t	byte;
 
@@ -40,8 +40,8 @@ static size_t	ft_printf_write(t_params *params, va_list *args)
 		byte += write(STDOUT_FD, "%", sizeof(char));
 	else if (byte == 0)
 		return (PRINTF_NULL);
-	if (params->specifier != '%')
-		va_arg(*args, int);
+//	if (params->specifier != '%')
+//		va_arg(*args, int);
 	ft_printf_free(params);
 	return (byte);
 }
@@ -63,7 +63,7 @@ int	ft_printf(const char *format, ...)
 		{
 			params = ft_calloc(1, sizeof(t_params));
 			format = ft_printf_check(params, (char *)format, args);
-			byte += ft_printf_write(params, &args);
+			byte += ft_printf_write(params);
 		}
 		else
 		{

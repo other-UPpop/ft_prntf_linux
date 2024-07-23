@@ -46,7 +46,7 @@ char	*ft_apply_pointer(size_t arg)
 	char	*str;
 
 	if (!arg)
-		return (ft_strdup("0"));
+		return (ft_strdup("(nil)"));
 	str = ft_apply_hex(arg, 16, LOW_HEX);
 	if (!str)
 		return (NULL);

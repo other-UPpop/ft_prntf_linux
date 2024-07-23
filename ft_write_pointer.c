@@ -20,7 +20,8 @@ static size_t	ft_write_flags(t_params *params, size_t *print_len,
 	byte = 0;
 	if (conv_len < *print_len && params->flags->flag_minus)
 		*print_len -= 2;
-	byte += write(STDOUT_FD, "0x", 2);
+	if (ft_strncmp(params->converted, "(nil)", 6) != 0)
+		byte += write(STDOUT_FD, "0x", 2);
 	return (byte);
 }
 

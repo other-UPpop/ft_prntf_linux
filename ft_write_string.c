@@ -42,8 +42,11 @@ ssize_t	ft_write_str(t_params *params, ssize_t print_len, ssize_t put_width)
 
 static ssize_t	ft_conv_str(t_params *params, ssize_t conv_len)
 {
+	if ((*params->precision < 6) && params->dot == true 
+		&& ft_strncmp(params-> converted, "(null)", 7) == 0)
+		return (0);
 	if (0 <= *params->precision && *params->precision <= conv_len
-		&& *params->precision != NOT_SPEC)
+		&& 0 < *params->precision)
 		return (*params->precision);
 	if ((conv_len < *params->precision && *params->precision)
 		|| *params->precision == NOT_SPEC)
@@ -64,8 +67,7 @@ ssize_t	ft_write_string(t_params *params)
 	if (params->specifier == 'c')
 		*params->precision = NOT_SPEC;
 	print_len = ft_conv_str(params, conv_len);
-	if (print_len < *params->width && *params->width != NOT_SPEC
-		&& *params->width > print_len)
+	if (print_len < *params->width && *params->width != NOT_SPEC)
 		put_width = *params->width - print_len;
 	else
 		put_width = 0;
